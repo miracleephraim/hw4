@@ -3,15 +3,15 @@
 ##############################################################################
 
 ## Assign yearly file paths
-bench.path.2007=paste0("data/input/ma-benchmarks/ratebook2007/countyrate2007.csv")
-bench.path.2008=paste0("data/input/ma-benchmarks/ratebook2008/countyrate2008.csv")
-bench.path.2009=paste0("data/input/ma-benchmarks/ratebook2009/countyrate2009.csv")
-bench.path.2010=paste0("data/input/ma-benchmarks/ratebook2010/CountyRate2010.csv")
-bench.path.2011=paste0("data/input/ma-benchmarks/ratebook2011/CountyRate2011.csv")
-bench.path.2012=paste0("data/input/ma-benchmarks/ratebook2012/CountyRate2012.csv")
-bench.path.2013=paste0("data/input/ma-benchmarks/ratebook2013/CountyRate2013.csv")
-bench.path.2014=paste0("data/input/ma-benchmarks/ratebook2014/CountyRate2014.csv")
-bench.path.2015=paste0("data/input/ma-benchmarks/ratebook2015/CSV/CountyRate2015.csv")
+bench.path.2007=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2007/countyrate2007.csv")
+bench.path.2008=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2008/countyrate2008.csv")
+bench.path.2009=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2009/countyrate2009.csv")
+bench.path.2010=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2010/CountyRate2010.csv")
+bench.path.2011=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2011/CountyRate2011.csv")
+bench.path.2012=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2012/CountyRate2012.csv")
+bench.path.2013=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2013/CountyRate2013.csv")
+bench.path.2014=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2014/CountyRate2014.csv")
+bench.path.2015=paste0("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/input/ma-benchmarks/ratebook2015/CSV/CountyRate2015.csv")
 
 ## Assign number of rows to drop in each CSV (they are all different because why not :))
 drops=array(dim=c(9,2))
@@ -81,4 +81,4 @@ bench.data.2015 = bench.data.2015 %>%
 benchmark.final=rbind(bench.data.2007, bench.data.2008, bench.data.2009,
                       bench.data.2010, bench.data.2011, bench.data.2012,
                       bench.data.2013, bench.data.2014, bench.data.2015)
-write_rds(benchmark.final,"data/output/ma_benchmark.rds")
+write_rds(benchmark.final,"C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/ma_benchmark.rds")
