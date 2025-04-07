@@ -12,9 +12,7 @@ if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata)
 
 
-C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission1/code
 # Call individual scripts -------------------------------------------------
-C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission1/code
 source("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission1/code/1_Plan_Data.R")
 source("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission1/code/2_Plan_Characteristics.R")
 source("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission1/code/3_Service_Areas.R")
@@ -27,15 +25,15 @@ source("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission1/code/8_FFS_Co
 
 
 # Tidy data ---------------------------------------------------------------
-full.ma.data <- read_rds("data/output/full_ma_data.rds")
-contract.service.area <- read_rds("data/output/contract_service_area.rds")
-star.ratings <- read_rds("data/output/star_ratings.rds")
-ma.penetration.data <- read_rds("data/output/ma_penetration.rds")
-plan.premiums <- read_rds("data/output/plan_premiums.rds")
-risk.rebate.final <- read_rds("data/output/risk_rebate.rds")
-benchmark.final <- read_rds("data/output/ma_benchmark.rds") %>%
+full.ma.data <- read_rds("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/full_ma_data.rds")
+contract.service.area <- read_rds("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/contract_service_area.rds")
+star.ratings <- read_rds("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/star_ratings.rds")
+ma.penetration.data <- read_rds("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/ma_penetration.rds")
+plan.premiums <- read_rds("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/plan_premiums.rds")
+risk.rebate.final <- read_rds("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/risk_rebate.rds")
+benchmark.final <- read_rds("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/ma_benchmark.rds") %>%
   mutate(ssa=as.double(ssa))
-ffs.costs.final <- read_rds("data/output/ffs_costs.rds")
+ffs.costs.final <- read_rds("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/ffs_costs.rds")
 
 final.data <- full.ma.data %>%
   inner_join(contract.service.area %>% 
@@ -130,7 +128,7 @@ final.data <- final.data %>%
   ))
 
 # save final dataset
-write_rds(final.data,"data/output/final_ma_data.rds")
+write_rds(final.data,"C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/final_ma_data.rds")
 
 
 

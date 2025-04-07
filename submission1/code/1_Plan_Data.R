@@ -1,6 +1,9 @@
 #########################################################################
 ## Read in enrollment data for January of each year
 #########################################################################
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata)
+
 
 for (y in 2007:2015) {
   ## Basic contract/plan information

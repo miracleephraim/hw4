@@ -82,3 +82,5 @@ benchmark.final=rbind(bench.data.2007, bench.data.2008, bench.data.2009,
                       bench.data.2010, bench.data.2011, bench.data.2012,
                       bench.data.2013, bench.data.2014, bench.data.2015)
 write_rds(benchmark.final,"C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/data/output/ma_benchmark.rds")
+
+bench$
