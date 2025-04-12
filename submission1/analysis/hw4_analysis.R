@@ -167,20 +167,12 @@ print(star_rating_summary)
 
 # question 6
 
-library(rdrobust)
-library(dplyr)
-
 # 3 vs 2.5 stars
 df_10c <- df_10 %>%
   filter(Star_Rating %in% c(2.5, 3)) %>%
   filter(!is.na(avg_enrollment), !is.na(Star_Rating))
 
-rd.est <- rdrobust(
-  y = df_10c$avg_enrollment,
-  x = df_10c$Star_Rating,
-  c = 3,
-  h = 0.125
-)
+rd.est <- rdrobust(y = df_10c$avg_enrollment, x = df_10c$Star_Rating, c = 3, h = 0.125)
 summary(rd.est)
 
 # 3.5 vs 3 stars
@@ -196,6 +188,89 @@ rd.est2 <- rdrobust(
 )
 summary(rd.est2)
 
+# question 7
+bandwidths <- c(0.1, 0.12, 0.13, 0.14, 0.15)
+
+# Initialize lists to store results
+results_3_vs_2_5 <- list()
+results_3_5_vs_3 <- list()
+
+# Loop over bandwidths for 3 vs 2.5 stars
+for (h in bandwidths) {
+  rd.est <- rdrobust(y = df_10c$avg_enrollment, x = df_10c$Star_Rating, c = 3, h = h)
+  results_3_vs_2_5[[as.character(h)]] <- rd.est$coef[1]  # Store the treatment effect
+}
+
+# Loop over bandwidths for 3.5 vs 3 stars
+for (h in bandwidths) {
+  rd.est2 <- rdrobust(y = df_10d$avg_enrollment, x = df_10d$Star_Rating, c = 3.5, h = h)
+  results_3_5_vs_3[[as.character(h)]] <- rd.est2$coef[1]  # Store the treatment effect
+}
+
+# Convert results to data frames for plotting
+results_df_3_vs_2_5 <- data.frame(
+  Bandwidth = bandwidths,
+  Treatment_Effect = unlist(results_3_vs_2_5)
+)
+
+results_df_3_5_vs_3 <- data.frame(
+  Bandwidth = bandwidths,
+  Treatment_Effect = unlist(results_3_5_vs_3)
+)
+
+# Plot for 3 vs 2.5 stars
+plot_3_vs_2_5 <- ggplot(results_df_3_vs_2_5, aes(x = Bandwidth, y = Treatment_Effect)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Sensitivity Analysis: 3 vs 2.5 Stars",
+    x = "Bandwidth",
+    y = "Treatment Effect"
+  ) +
+  theme_minimal()
+
+# Plot for 3.5 vs 3 stars
+plot_3_5_vs_3 <- ggplot(results_df_3_5_vs_3, aes(x = Bandwidth, y = Treatment_Effect)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Sensitivity Analysis: 3.5 vs 3 Stars",
+    x = "Bandwidth",
+    y = "Treatment Effect"
+  ) +
+  theme_minimal()
+
+# question 9
+
+# For 3 vs 2.5 stars
+df_10c_characteristics <- df_10 %>%
+  filter(Star_Rating %in% c(2.5, 3)) %>%
+  filter(!is.na(parent_org), !is.na(partd))
+
+characteristics_3_vs_2_5 <- df_10c_characteristics %>%
+  group_by(Star_Rating, parent_org) %>%
+  summarise(
+    count_partd = sum(partd, na.rm = TRUE),
+    total_plans = n(),
+    partd_share = count_partd / total_plans
+  )
+
+print(characteristics_3_vs_2_5)
+
+# For 3.5 vs 3 stars
+df_10d_characteristics <- df_10 %>%
+  filter(Star_Rating %in% c(3, 3.5)) %>%
+  filter(!is.na(parent_org), !is.na(partd))
+
+characteristics_3_5_vs_3 <- df_10d_characteristics %>%
+  group_by(Star_Rating, parent_org) %>%
+  summarise(
+    count_partd = sum(partd, na.rm = TRUE),
+    total_plans = n(),
+    partd_share = count_partd / total_plans
+  )
+
+print(characteristics_3_5_vs_3)
 
 
 save.image("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission1/results/hw_workspace4.Rdata")

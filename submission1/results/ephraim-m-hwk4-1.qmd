@@ -9,15 +9,15 @@ format:
 ```{r setup, include=FALSE}
 
 
-install.packages("readr")
-install.packages("knitr")
-install.packages("rmarkdown")
-install.packages("stargazer")
-install.packages("fixest")
+# install.packages("readr")
+# install.packages("knitr")
+# install.packages("rmarkdown")
+# install.packages("stargazer")
+# install.packages("fixest")
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata)
 
-load("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission1/results/hw_workspace4.Rdata")
+load("C:/Users/mirac/Documents/GitHub/econ470_ma/hw4/submission2/results/hw_workspace4.Rdata")
 
 ```
 
@@ -84,7 +84,7 @@ ggplot(q3, aes(x = year, y = avg_rate)) +
 
 Plot the average share of Medicare Advantage (relative to all Medicare eligibles) over time from 2010 through 2015. Has Medicare Advantage increased or decreased in popularity? How does this share correlate with benchmark payments?
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 
 ggplot(q4_b, aes(x = year, y = avg)) +
     geom_line() +
@@ -106,7 +106,7 @@ For the rest of the assignment, we’ll use a regression discontinuity design to
 
 Calculate the running variable underlying the star rating. Provide a table showing the number of plans that are rounded up into a 3-star, 3.5-star, 4-star, 4.5-star, and 5-star rating.
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 
 print(star_rating_summary)
 
@@ -117,9 +117,21 @@ print(star_rating_summary)
 
 Using the RD estimator with a bandwidth of 0.125, provide an estimate of the effect of receiving a 3-star versus a 2.5 star rating on enrollments. Repeat the exercise to estimate the effects at 3.5 stars, and summarize your results in a table.
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 
+rd.est <- rdrobust(
+  y = df_10c$avg_enrollment,
+  x = df_10c$Star_Rating,
+  c = 3,
+  h = 0.125
+)
 
+rd.est <- rdrobust(
+  y = df_10c$avg_enrollment,
+  x = df_10c$Star_Rating,
+  c = 3,
+  h = 0.125
+)
 
 ```
 
@@ -128,8 +140,10 @@ Using the RD estimator with a bandwidth of 0.125, provide an estimate of the eff
 
 Repeat your results for bandwidhts of 0.1, 0.12, 0.13, 0.14, and 0.15 (again for 3 and 3.5 stars). Show all of the results in a graph. How sensitive are your findings to the choice of bandwidth?
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 
+print(plot_3_vs_2_5)
+print(plot_3_5_vs_3)
 
 
 ```
@@ -150,10 +164,11 @@ Examine (graphically) whether contracts appear to manipulate the running variabl
 
 Similar to question 4, examine whether plans just above the threshold values have different characteristics than contracts just below the threshold values. Use HMO and Part D status as your plan characteristics.
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 
+print(characteristics_3_vs_2_5)
 
-
+print(characteristics_3_5_vs_3)
 ```
 
 
